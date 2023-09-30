@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CadastroClienteAnimalController">
+   <children>
+      <AnchorPane prefHeight="521.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="115.0" layoutY="54.0" prefHeight="31.0" prefWidth="371.0" text="Cadastro de novo Cliente e Animal">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="101.0" layoutY="152.0" text="nome do dono:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="101.0" layoutY="188.0" text="nome do animal:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="101.0" layoutY="224.0" text="categoria do animal:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="campoNomeDono" layoutX="245.0" layoutY="152.0" />
+            <TextField fx:id="campoNomeAnimal" layoutX="245.0" layoutY="188.0" />
+            <TextField fx:id="campoCategoriaAnimal" layoutX="264.0" layoutY="224.0" />
+            <Button fx:id="botaoCadastrar" layoutX="238.0" layoutY="283.0" mnemonicParsing="false" onAction="#cadastrar" text="cadastrar" />
+            <Button fx:id="botaoRetornar" layoutX="479.0" layoutY="338.0" mnemonicParsing="false" onAction="#retornarTela" text="retornar" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
