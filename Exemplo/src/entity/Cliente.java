@@ -5,10 +5,18 @@ import java.util.List;
 public class Cliente {
     private int idcliente;
     private String nome;
+    private String cpf;
     private List<Animal> animais; // Relacionamento 1:n com Animal
 
-    public Cliente(String nome) {
+    public Cliente() {
+        this.nome = "";
+        this.cpf = "";
+
+    }
+    
+    public Cliente(String nome, String cpf) {
         this.nome = nome;
+        this.cpf = cpf;
     }
 
     // Getter para o campo 'idcliente'
@@ -29,6 +37,14 @@ public class Cliente {
     // Setter para o campo 'nome'
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+     public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     // Getter para a lista de animais

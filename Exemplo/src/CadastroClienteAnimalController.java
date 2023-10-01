@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -15,32 +16,55 @@ import javafx.stage.Stage;
 public class CadastroClienteAnimalController {
 
     @FXML
-    private Button botaoCadastrar;
+    private TextField campoNomeDono;
+
+    @FXML
+    private TextField campoCPF;
+    
+    @FXML
+    private TextField campoNomeAnimal;
 
     @FXML
     private TextField campoCategoriaAnimal;
 
     @FXML
-    private TextField campoNomeAnimal;
+    private Button botaoCadastrar;
 
     @FXML
-    private TextField campoNomeDono;
+    private Button botaoRetornar;
+
 
     @FXML
     void cadastrar(ActionEvent event) {
         String nomeDono = campoNomeDono.getText();
+        String cpf = campoCPF.getText();
         String nomeAnimal = campoNomeAnimal.getText();
         String categoriaAnimal = campoCategoriaAnimal.getText();
 
-        Cliente cliente = new Cliente(nomeDono);
+        Cliente cliente = new Cliente(nomeDono,cpf);
         ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.adicionarCliente(cliente, nomeAnimal, categoriaAnimal);
-        if(clienteDAO.verificarCliente(cliente)){
-            System.out.println("Cliente cadastrado com sucesso!");
-        }else{
-            System.out.println("Cliente já cadastrado!");
-        }
 
+        System.out.println(ClienteDAO.verificarCliente(cliente.getCpf()));
+
+        if(ClienteDAO.verificarCliente(cliente.getCpf()) == false){
+            //System.out.println("To no adicionar");
+            clienteDAO.adicionarCliente(cliente, cpf, nomeAnimal, categoriaAnimal);
+            //System.out.println("Cliente cadastrado com sucesso!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Sucesso!");
+            alert.setHeaderText("Cadastro realizado com sucesso");
+            alert.setContentText("Por favor, retorne a tela de gerenciamento.");
+            alert.showAndWait();
+        }else{
+            //System.out.println("to no ja cadastrado");
+            //System.out.println("Cliente já cadastrado!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro!");
+            alert.setHeaderText("Cliente já cadastrado!");
+            alert.setContentText("Por favor, retorne a tela de gerenciamento.");
+            alert.showAndWait();
+        }
+        
     }
 
     @FXML

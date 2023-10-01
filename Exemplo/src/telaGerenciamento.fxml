@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="445.0" prefWidth="269.0">
          <children>
-            <TableView fx:id="tabelaCliAni" layoutX="218.0" layoutY="74.0" prefHeight="293.0" prefWidth="244.0">
+            <TableView fx:id="tabelaCliAni" layoutX="219.0" layoutY="93.0" prefHeight="293.0" prefWidth="244.0">
               <columns>
                 <TableColumn fx:id="clientes" prefWidth="77.0" text="Clientes" />
                 <TableColumn fx:id="animais" prefWidth="89.0" text="Animais" />
@@ -22,7 +22,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TableView fx:id="tabelaVet" layoutX="476.0" layoutY="74.0" prefHeight="293.0" prefWidth="200.0">
+            <TableView fx:id="tabelaVet" layoutX="476.0" layoutY="93.0" prefHeight="293.0" prefWidth="200.0">
                <columns>
                   <TableColumn prefWidth="99.0" text="Veterinarios Disponiveis" />
                </columns>
@@ -30,17 +30,17 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button fx:id="botaoCadastrarNovoCliente" layoutX="20.0" layoutY="107.0" mnemonicParsing="false" onAction="#casdatrarNovoCliente" text="Cadastrar Novo Cliente" />
-            <Button fx:id="botaoCadastrarVeterinario" layoutX="19.0" layoutY="187.0" mnemonicParsing="false" onAction="#cadastrarVeterinario" text="Cadastrar Veterinario" />
-            <Button fx:id="botaoMarcarAtendimento" layoutX="20.0" layoutY="228.0" mnemonicParsing="false" onAction="#marcarAtendimento" text="Marcar Atendimento" />
-            <Button fx:id="botaoConcluirAtendimento" layoutX="17.0" layoutY="276.0" mnemonicParsing="false" onAction="#concluirAtendimento" text="Concluir Atendimento" />
-            <Label layoutX="258.0" layoutY="31.0" text="Tela de Gerenciamento">
+            <Button fx:id="botaoCadastrarNovoCliente" layoutX="15.0" layoutY="93.0" mnemonicParsing="false" onAction="#casdatrarNovoCliente" text="Cadastrar Novo Cliente" />
+            <Button fx:id="botaoCadastrarVeterinario" layoutX="19.0" layoutY="178.0" mnemonicParsing="false" onAction="#cadastrarVeterinario" text="Cadastrar Veterinario" />
+            <Button fx:id="botaoMarcarAtendimento" layoutX="20.0" layoutY="220.0" mnemonicParsing="false" onAction="#marcarAtendimento" text="Marcar Atendimento" />
+            <Button fx:id="botaoConcluirAtendimento" layoutX="17.0" layoutY="266.0" mnemonicParsing="false" onAction="#concluirAtendimento" text="Concluir Atendimento" />
+            <Label layoutX="233.0" layoutY="27.0" text="Tela de Gerenciamento">
                <font>
-                  <Font size="17.0" />
+                  <Font size="21.0" />
                </font>
             </Label>
-            <Button fx:id="botaoGerenciarFuncionarios" layoutX="15.0" layoutY="321.0" mnemonicParsing="false" onAction="#gerenciarFuncionarios" text="Gerenciar Funcionarios" />
-            <Button fx:id="botaoAdicionarAnimal" layoutX="20.0" layoutY="149.0" mnemonicParsing="false" onAction="#adicionarAnimal" text="Adicionar Animal" />
+            <Button fx:id="botaoGerenciarFuncionarios" layoutX="15.0" layoutY="309.0" mnemonicParsing="false" onAction="#gerenciarFuncionarios" text="Gerenciar Funcionarios" />
+            <Button fx:id="botaoAdicionarAnimal" layoutX="20.0" layoutY="133.0" mnemonicParsing="false" onAction="#adicionarAnimal" text="Adicionar Animal" />
          </children>
       </AnchorPane>
    </children>

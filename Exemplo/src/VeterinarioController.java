@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,6 +25,9 @@ public class VeterinarioController {
     private TextField campoEspecializacao;
 
     @FXML
+    private TextField campoCRMV;
+
+    @FXML
     private TextField campoNovoVeterinario;
 
     @FXML
@@ -32,16 +36,28 @@ public class VeterinarioController {
     @FXML
     void fazerCadastro(ActionEvent event) {
         String nomeVeterinario = campoNovoVeterinario.getText();
+        String CRMV = campoCRMV.getText();
         String tipoServico = campoTipoServico.getText();
         String especializacao = campoEspecializacao.getText();
 
-        Veterinario veterinario = new Veterinario(nomeVeterinario);
+        Veterinario veterinario = new Veterinario(nomeVeterinario, CRMV);
         VeterinarioDAO veterinarioDAO = new VeterinarioDAO();
-        veterinarioDAO.adicionarVeterinario(veterinario, tipoServico, especializacao);
-        if(veterinarioDAO.verificarVeterinario(veterinario)){
-            System.out.println("Veterinario cadastrado com sucesso!");
+
+
+
+        if(VeterinarioDAO.verificarVeterinario(veterinario.getCRMV()) == false){
+            veterinarioDAO.adicionarVeterinario(veterinario, CRMV, tipoServico, especializacao);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Sucesso!");
+            alert.setHeaderText("Cadastro realizado com sucesso");
+            alert.setContentText("Por favor, retorne a tela de gerenciamento.");
+            alert.showAndWait();
         }else{
-            System.out.println("Veterinario já cadastrado!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro!");
+            alert.setHeaderText("Veterinario já cadastrado");
+            alert.setContentText("Por favor, verifique o CRMV digitado.");
+            alert.showAndWait();
         }
     }
 

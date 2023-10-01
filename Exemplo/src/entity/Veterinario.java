@@ -46,13 +46,27 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.conf.StringProperty;
+
 public class Veterinario {
     private int idveterinario;
     private String nome;
+    private String CRMV;
     private List<Servico> servicos;  // Lista de serviços associados a este veterinário
 
-    public Veterinario(String nome) {
+    // // Propriedade observável associada ao atributo 'nome' e 'CRMV'
+    private StringProperty nomeProperty;
+    private StringProperty CRMVProperty;
+
+    public Veterinario(){
+        this.nome = "";
+        this.CRMV = "";
+        this.servicos = new ArrayList<>();
+    }
+
+    public Veterinario(String nome, String CRMV) {
         this.nome = nome;
+        this.CRMV = CRMV;
         this.servicos = new ArrayList<>();
     }
 
@@ -62,6 +76,14 @@ public class Veterinario {
 
     public void setId(int idveterinario) {
         this.idveterinario = idveterinario;
+    }
+
+    public String getCRMV() {
+        return CRMV;
+    }
+
+    public void setCRMV(String CRMV) {
+        this.CRMV = CRMV;
     }
 
     public String getNome() {
@@ -79,6 +101,15 @@ public class Veterinario {
     public void adicionarServico(Servico servico) {
         this.servicos.add(servico);
     }
+
+    public StringProperty getNomeProperty() {
+        return nomeProperty;
+    }
+
+    public StringProperty getCRMVProperty() {
+        return CRMVProperty;
+    }
+
 }
 
 

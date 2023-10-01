@@ -1,6 +1,5 @@
 import java.io.IOException;
 
-import fxmlL.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,8 +89,12 @@ public class GerenciamentoController {
     }
 
     @FXML
-    void marcarAtendimento(ActionEvent event) {
-
+    void marcarAtendimento(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("marcarConsulta.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

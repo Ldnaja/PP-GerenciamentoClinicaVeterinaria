@@ -5,20 +5,39 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VeterinarioController">
    <children>
       <AnchorPane prefHeight="582.0" prefWidth="600.0">
          <children>
-            <Label layoutX="266.0" layoutY="62.0" text="cadastro de veterinario" />
-            <Label layoutX="111.0" layoutY="144.0" text="nome:" />
-            <Label layoutX="114.0" layoutY="173.0" text="tipo de serviço:" />
-            <TextField fx:id="campoNovoVeterinario" layoutX="192.0" layoutY="140.0" />
-            <TextField fx:id="campoTipoServico" layoutX="200.0" layoutY="169.0" />
-            <Button fx:id="botaoCadastrar" layoutX="256.0" layoutY="258.0" mnemonicParsing="false" onAction="#fazerCadastro" text="cadastrar" />
-            <Button fx:id="botaoRetornar" layoutX="502.0" layoutY="347.0" mnemonicParsing="false" onAction="#retornarTela" text="retornar" />
-            <Label layoutX="115.0" layoutY="207.0" text="especialização:" />
-            <TextField fx:id="campoEspecializacao" layoutX="203.0" layoutY="201.0" />
+            <Label layoutX="201.0" layoutY="56.0" text="Cadastro de Veterinario">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <Label layoutX="109.0" layoutY="135.0" text="Nome do Veterinario:">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label layoutX="146.0" layoutY="208.0" text="Tipo de serviço:">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <TextField fx:id="campoNovoVeterinario" layoutX="256.0" layoutY="132.0" />
+            <TextField fx:id="campoTipoServico" layoutX="256.0" layoutY="205.0" />
+            <Button fx:id="botaoCadastrar" layoutX="256.0" layoutY="302.0" mnemonicParsing="false" onAction="#fazerCadastro" text="Cadastrar" />
+            <Button fx:id="botaoRetornar" layoutX="502.0" layoutY="347.0" mnemonicParsing="false" onAction="#retornarTela" text="Retornar" />
+            <Label layoutX="156.0" layoutY="246.0" text="Especialização:">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <TextField fx:id="campoEspecializacao" layoutX="256.0" layoutY="243.0" />
+            <Label layoutX="201.0" layoutY="170.0" text="CRMV:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="campoCRMV" layoutX="256.0" layoutY="166.0" />
          </children>
       </AnchorPane>
    </children>

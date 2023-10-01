@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -40,10 +41,20 @@ public class CadastroController {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         //verificar o cadastro do funcionario no banco de dados
         if (funcionarioDAO.verificarFuncionario(funcionario)) {
-            System.out.println("Funcionario já cadastrado!");
+            //System.out.println("Funcionario já cadastrado!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Funcionario já cadastrado!");
+            alert.setContentText("Por favor, retorne a tela de login!");
+            alert.showAndWait();
         } else {
             funcionarioDAO.cadastrarFuncionario(funcionario);
-            System.out.println("Funcionario cadastrado com sucesso!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Sucesso");
+            alert.setHeaderText("Funcionario cadastrado com sucesso!");
+            alert.setContentText("Por favor, retorne a tela de login!");
+            alert.showAndWait();
+            //System.out.println("Funcionario cadastrado com sucesso!");
         }
     }
 

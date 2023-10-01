@@ -3,17 +3,20 @@ package DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import conexao.conexao;
 import entity.Veterinario;
 
 public class VeterinarioDAO {
 
-    public void adicionarVeterinario(Veterinario veterinario, String tipoServico, String especializacaoVet){
-        String sql = "INSERT INTO VETERINARIO (nome) VALUES (?)";
+    public void adicionarVeterinario(Veterinario veterinario, String CRMV, String tipoServico, String especializacaoVet){
+        String sql = "INSERT INTO VETERINARIO (nome,CRMV) VALUES (?,?)";
 
         try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, veterinario.getNome());
+            stmt.setString(2, CRMV);
             stmt.execute();
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
@@ -42,10 +45,10 @@ public class VeterinarioDAO {
     }
 
     public Veterinario acharVeterinario(Veterinario veterinario) {
-        String sql = "SELECT * FROM VETERINARIO WHERE nome = ?";
+        String sql = "SELECT * FROM VETERINARIO WHERE CRMV = ?";
 
         try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
-            stmt.setString(1, veterinario.getNome());
+            stmt.setString(1, veterinario.getCRMV());
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -58,11 +61,11 @@ public class VeterinarioDAO {
         return veterinario;
     }
 
-    public boolean verificarVeterinario(Veterinario veterinario) {
-        String sql = "SELECT * FROM VETERINARIO WHERE nome = ?";
+    public static boolean verificarVeterinario(String CRMV) {
+        String sql = "SELECT * FROM VETERINARIO WHERE CRMV = ?";
 
         try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
-            stmt.setString(1, veterinario.getNome());
+            stmt.setString(1, CRMV);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -75,11 +78,56 @@ public class VeterinarioDAO {
         return false;
     }
 
-    public static void main(String[] args){
+    public Veterinario acharVeterinarioPeloCRMV(String CRMV) {
+        String sql = "SELECT * FROM VETERINARIO WHERE CRMV = ?";
+
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+            stmt.setString(1, CRMV);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Veterinario veterinario = new Veterinario();
+                    veterinario.setId(rs.getInt("idveterinario"));
+                    veterinario.setNome(rs.getString("nome"));
+                    veterinario.setCRMV(rs.getString("CRMV"));
+                    return veterinario;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<Veterinario> acharVeterinarios(String tipoServico) {
+        String sql = "SELECT * FROM VETERINARIO V INNER JOIN SERVICO S ON V.idveterinario = S.idveterinario WHERE S.tiposervico = ?";
+
+        List<Veterinario> lista = new ArrayList<Veterinario>();
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+            stmt.setString(1, tipoServico);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Veterinario veterinario = new Veterinario();
+                    veterinario.setId(rs.getInt("idveterinario"));
+                    veterinario.setNome(rs.getString("nome"));
+                    veterinario.setCRMV(rs.getString("CRMV"));
+                    lista.add(veterinario);
+
+                }
+            }
+            return lista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /*public static void main(String[] args){
         Veterinario veterinario = new Veterinario(null);
         veterinario.setNome("kristophr");
 
         VeterinarioDAO veterinarioDAO = new VeterinarioDAO();
         veterinarioDAO.adicionarVeterinario(veterinario, "consulta normal", "Gato");
-    }
+    }*/
 }
