@@ -13,13 +13,13 @@
             <Button fx:id="botaoCadastrarNovoCliente" layoutX="34.0" layoutY="93.0" mnemonicParsing="false" onAction="#casdatrarNovoCliente" text="Cadastrar Novo Cliente" />
             <Button fx:id="botaoCadastrarVeterinario" layoutX="277.0" layoutY="93.0" mnemonicParsing="false" onAction="#cadastrarVeterinario" text="Cadastrar Veterinario" />
             <Button fx:id="botaoMarcarAtendimento" layoutX="491.0" layoutY="93.0" mnemonicParsing="false" onAction="#marcarAtendimento" text="Marcar Atendimento" />
-            <Button fx:id="botaoConcluirAtendimento" layoutX="279.0" layoutY="219.0" mnemonicParsing="false" onAction="#concluirAtendimento" text="Concluir Atendimento" />
+            <Button fx:id="botaoConcluirAtendimento" layoutX="37.0" layoutY="219.0" mnemonicParsing="false" onAction="#concluirAtendimento" text="Concluir Atendimento" />
             <Label layoutX="233.0" layoutY="27.0" text="Tela de Gerenciamento">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <Button fx:id="botaoGerenciarFuncionarios" layoutX="35.0" layoutY="219.0" mnemonicParsing="false" onAction="#gerenciarFuncionarios" text="Gerenciar Funcionarios" />
+            <Button fx:id="botaoGerenciarFuncionarios" layoutX="272.0" layoutY="219.0" mnemonicParsing="false" onAction="#gerenciarFuncionarios" text="Gerenciar Funcionarios" />
             <Button fx:id="botaoInformações" layoutX="495.0" layoutY="219.0" mnemonicParsing="false" onAction="#informaçõesGerais" text="Informações Gerais" />
          </children>
       </AnchorPane>

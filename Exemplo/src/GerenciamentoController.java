@@ -71,8 +71,12 @@ public class GerenciamentoController {
     }
 
     @FXML
-    void concluirAtendimento(ActionEvent event) {
-
+    void concluirAtendimento(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("concluirAtendimento.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
