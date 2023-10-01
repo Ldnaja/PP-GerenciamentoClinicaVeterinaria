@@ -1,5 +1,8 @@
 package entity;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.List;
 
 public class Cliente {
@@ -11,7 +14,6 @@ public class Cliente {
     public Cliente() {
         this.nome = "";
         this.cpf = "";
-
     }
     
     public Cliente(String nome, String cpf) {
@@ -55,5 +57,9 @@ public class Cliente {
     // Setter para a lista de animais
     public void setAnimais(List<Animal> animais) {
         this.animais = animais;
+    }
+
+    public StringProperty nomePropertyCli() {
+        return new SimpleStringProperty(nome);
     }
 }

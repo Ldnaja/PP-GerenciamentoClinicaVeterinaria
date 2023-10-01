@@ -1,52 +1,10 @@
-/*package entity;
-
-public class Veterinario {
-    private int idveterinario;
-    private String nome;
-    private String especializacao;
-
-    public Veterinario(String nome, String especializacao) {
-        this.nome = nome;
-        this.especializacao = especializacao;
-    }
-
-    // Getter para o campo 'idveterinario'
-    public int getId() {
-        return idveterinario;
-    }
-
-    // Setter para o campo 'idveterinario'
-    public void setId(int idveterinario) {
-        this.idveterinario = idveterinario;
-    }
-
-    // Getter para o campo 'nome'
-    public String getNome() {
-        return nome;
-    }
-
-    // Setter para o campo 'nome'
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    // Getter para o campo 'especializacao'
-    public String getEspecializacao() {
-        return especializacao;
-    }
-
-    // Setter para o campo 'especializacao'
-    public void setEspecializacao(String especializacao) {
-        this.especializacao = especializacao;
-    }
-}*/
-
 package entity;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mysql.cj.conf.StringProperty;
 
 public class Veterinario {
     private int idveterinario;
@@ -54,11 +12,7 @@ public class Veterinario {
     private String CRMV;
     private List<Servico> servicos;  // Lista de serviços associados a este veterinário
 
-    // // Propriedade observável associada ao atributo 'nome' e 'CRMV'
-    private StringProperty nomeProperty;
-    private StringProperty CRMVProperty;
-
-    public Veterinario(){
+    public Veterinario() {
         this.nome = "";
         this.CRMV = "";
         this.servicos = new ArrayList<>();
@@ -102,14 +56,9 @@ public class Veterinario {
         this.servicos.add(servico);
     }
 
-    public StringProperty getNomeProperty() {
-        return nomeProperty;
+    public StringProperty nomePropertyVet() {
+        return new SimpleStringProperty(nome);
     }
-
-    public StringProperty getCRMVProperty() {
-        return CRMVProperty;
-    }
-
 }
 
 

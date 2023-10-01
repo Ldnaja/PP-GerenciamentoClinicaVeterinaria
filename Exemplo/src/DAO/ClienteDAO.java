@@ -3,6 +3,8 @@ package DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import conexao.conexao;
 import entity.Cliente;
@@ -77,7 +79,7 @@ public class ClienteDAO {
         return false;
     }
 
-    public Cliente acharClientePeloCPF(String cpf) {
+    public static Cliente acharClientePeloCPF(String cpf) {
         String sql = "SELECT * FROM CLIENTE WHERE cpf = ?";
 
         try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
@@ -93,6 +95,30 @@ public class ClienteDAO {
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<Cliente> acharClientes(String nomeAnimal){
+        String sql = "SELECT * FROM CLIENTE INNER JOIN ANIMAL ON CLIENTE.idCliente = ANIMAL.idCliente WHERE ANIMAL.nome = ?";
+
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        try(PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)){
+            stmt.setString(1, nomeAnimal);
+
+            try(ResultSet rs = stmt.executeQuery()){
+
+                while(rs.next()){
+                    Cliente cliente = new Cliente();
+                    cliente.setId(rs.getInt("idCliente"));
+                    cliente.setNome(rs.getString("nome"));
+                    cliente.setCpf(rs.getString("cpf"));
+                    clientes.add(cliente);
+                }
+            }
+            return clientes;
+        }catch(SQLException e){
             e.printStackTrace();
         }
         return null;

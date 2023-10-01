@@ -78,7 +78,7 @@ public class VeterinarioDAO {
         return false;
     }
 
-    public Veterinario acharVeterinarioPeloCRMV(String CRMV) {
+    public static Veterinario acharVeterinarioPeloCRMV(String CRMV) {
         String sql = "SELECT * FROM VETERINARIO WHERE CRMV = ?";
 
         try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
@@ -98,6 +98,27 @@ public class VeterinarioDAO {
         }
         return null;
     }
+
+    /*public static List<Veterinario> acharVeterinarios(String tipoServico) {
+        String sql = "SELECT * FROM VETERINARIO V INNER JOIN SERVICO S ON V.idveterinario = S.idveterinario WHERE S.tiposervico = ?";
+
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+            stmt.setString(1, tipoServico);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Veterinario veterinario = new Veterinario();
+                    veterinario.setId(rs.getInt("idveterinario"));
+                    veterinario.setNome(rs.getString("nome"));
+                    veterinario.setCRMV(rs.getString("CRMV"));
+                    return List<Veterinario> veterinario;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
 
     public static List<Veterinario> acharVeterinarios(String tipoServico) {
         String sql = "SELECT * FROM VETERINARIO V INNER JOIN SERVICO S ON V.idveterinario = S.idveterinario WHERE S.tiposervico = ?";

@@ -1,5 +1,10 @@
 import java.io.IOException;
+import java.util.List;
 
+import DAO.ClienteDAO;
+import DAO.VeterinarioDAO;
+import entity.Cliente;
+import entity.Veterinario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +22,6 @@ public class GerenciamentoController {
     private Scene scene;
 
     @FXML
-    private TableColumn<?, ?> animais;
-
-    @FXML
-    private Button botaoAdicionarAnimal;
-
-    @FXML
     private Button botaoCadastrarNovoCliente;
 
     @FXML
@@ -35,27 +34,20 @@ public class GerenciamentoController {
     private Button botaoGerenciarFuncionarios;
 
     @FXML
+    private Button botaoInformações;
+
+    @FXML
     private Button botaoMarcarAtendimento;
 
     @FXML
-    private TableColumn<?, ?> categoria;
-
-    @FXML
-    private TableColumn<?, ?> clientes;
-
-    @FXML
-    private TableView<?> tabelaCliAni;
-
-    @FXML
-    private TableView<?> tabelaVet;
-
-    @FXML
-    void adicionarAnimal(ActionEvent event) throws IOException {
+    void informaçõesGerais(ActionEvent event) throws IOException {
+        /*
+        AINDA DECIDIR O QUE FAZER
         Parent root = FXMLLoader.load(getClass().getResource("adicionarAnimal.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
 
     }
 
