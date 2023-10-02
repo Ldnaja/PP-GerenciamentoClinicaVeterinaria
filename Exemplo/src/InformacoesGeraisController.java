@@ -120,7 +120,7 @@ public class InformacoesGeraisController {
 
         if(result.isPresent() && result.get() == ButtonType.OK){
             ClienteDAO clienteDAO = new ClienteDAO();
-            clienteDAO.excluirCliente(clienteSelecionado.getNome());
+            clienteDAO.excluirCliente(clienteSelecionado.getCpf());
         
             tabelaClientes.getItems().remove(selectedIndex);
         }
@@ -148,7 +148,7 @@ public class InformacoesGeraisController {
 
         if(result.isPresent() && result.get() == ButtonType.OK){
             VeterinarioDAO veterinarioDAO = new VeterinarioDAO();
-            veterinarioDAO.excluirVeterinario(veterinarioSelecionado.getNome());
+            veterinarioDAO.excluirVeterinario(veterinarioSelecionado.getCRMV());
         
             tabelaVeterinarios.getItems().remove(selectedIndex);
         }

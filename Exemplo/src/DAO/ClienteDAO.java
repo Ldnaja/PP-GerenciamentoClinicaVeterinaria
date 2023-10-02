@@ -169,14 +169,33 @@ public class ClienteDAO {
         return null;
     }
 
-    public void excluirCliente(String nome){
-        String sqlExcluir = "DELETE FROM CLIENTE WHERE nome = ?";
+    public void excluirCliente(String cpf){
+        String sqlExcluir = "DELETE FROM CLIENTE WHERE cpf = ?";
         try(PreparedStatement stmtExcluir = conexao.getConexao().prepareStatement(sqlExcluir)){
-            stmtExcluir.setString(1, nome);
+            stmtExcluir.setString(1, cpf);
             stmtExcluir.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Cliente cliente = new Cliente();
+        cliente.setNome("João");
+        cliente.setCpf("12345678910");
+        clienteDAO.adicionarCliente(cliente, "12345678910", "Rex", "Cachorro");
+        
+        Cliente cliente2 = new Cliente();
+        cliente2.setNome("Maria");
+        cliente2.setCpf("12345678911");
+        clienteDAO.adicionarCliente(cliente2, "12345678911", "Bolinha", "Gato");
+
+        Cliente cliente3 = new Cliente();
+        cliente3.setNome("João");
+        cliente3.setCpf("12345678912");
+        clienteDAO.adicionarCliente(cliente3, "12345678912", "Bolinha", "Gato");
+    }
+
 
 }

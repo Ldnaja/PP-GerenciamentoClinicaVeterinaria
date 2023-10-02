@@ -166,14 +166,17 @@ public class VeterinarioDAO {
         return null;
     }
 
-    public void excluirVeterinario(String nome){
-        String sql = "DELETE FROM VETERINARIO WHERE nome = ?";
+    public void excluirVeterinario(String CRMV){
+        String sql = "DELETE FROM VETERINARIO WHERE CRMV = ?";
 
         try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
-            stmt.setString(1, nome);
+            stmt.setString(1, CRMV);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
     }
 }
