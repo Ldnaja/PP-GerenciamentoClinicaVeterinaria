@@ -80,7 +80,12 @@ public class GerenciamentoController {
     }
 
     @FXML
-    void gerenciarFuncionarios(ActionEvent event) {
+    void gerenciarFuncionarios(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("gerenciamentoFuncionarios.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
     }
 

@@ -3,6 +3,8 @@ package DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import conexao.conexao;
 import entity.Funcionario;
@@ -36,6 +38,20 @@ public class FuncionarioDAO {
         }
     }
 
+    public boolean verificaFuncionarioExistente(Funcionario funcionario) {
+        String sql = "SELECT * FROM FUNCIONARIO WHERE login = ?";
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+            stmt.setString(1, funcionario.getLogin());
+
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                return resultSet.next(); // Retorna true se o funcionário existe no banco de dados
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Retorna false em caso de exceção ou se o funcionário não existe
+        }
+    }
+
     public boolean mostrarFuncionario(Funcionario funcionario) {
         String sql = "SELECT * FROM FUNCIONARIO WHERE login = ?";
         try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
@@ -50,38 +66,44 @@ public class FuncionarioDAO {
         }
     }
 
-    public void excluirFuncionario(int idFuncionario) {
-
-        String sqlExcluir = "DELETE FROM FUNCIONARIO WHERE idFuncionario = ?";
+    public void excluirFuncionario(String login) {
+        String sqlExcluir = "DELETE FROM FUNCIONARIO WHERE login = ?";
         try (PreparedStatement stmtExcluir = conexao.getConexao().prepareStatement(sqlExcluir)) {
-            stmtExcluir.setInt(1, idFuncionario);
+            stmtExcluir.setString(1, login);
             stmtExcluir.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        String sqlAtualizarIDs = "UPDATE FUNCIONARIO SET idFuncionario = idFuncionario - 1 WHERE idFuncionario > ?";
-        try (PreparedStatement stmtAtualizarIDs = conexao.getConexao().prepareStatement(sqlAtualizarIDs)) {
-            stmtAtualizarIDs.setInt(1, idFuncionario);
-            stmtAtualizarIDs.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    /*public static void main(String[] args) {
-        Funcionario funcionario = new Funcionario(null, null);
-        funcionario.setLogin("higgs");
-        funcionario.setSenha("admin");
+    public void alterarSenha(Funcionario funcionario) {
+        String sql = "UPDATE FUNCIONARIO SET senha = ? WHERE login = ?";
 
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.cadastrarFuncionario(funcionario);
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+            stmt.setString(1, funcionario.getSenha());
+            stmt.setString(2, funcionario.getLogin());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-        // Exemplo de verificarFuncionario
-        boolean funcionarioExiste = funcionarioDAO.verificarFuncionario(funcionario);
-        System.out.println("O funcionário existe no banco de dados? " + funcionarioExiste);
+    public List<String> listarLoginsFuncionarios() {
+        List<String> logins = new ArrayList<>();
+        String sql = "SELECT login FROM FUNCIONARIO";
 
-        // Exemplo de como usar o método excluirFuncionario
-        funcionarioDAO.excluirFuncionario(3); // Substitua pelo ID do funcionário que você deseja excluir
-    }*/
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql);
+             ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                String login = resultSet.getString("login");
+                logins.add(login);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return logins;
+    }
 }

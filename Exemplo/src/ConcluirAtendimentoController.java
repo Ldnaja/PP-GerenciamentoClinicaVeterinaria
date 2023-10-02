@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import entity.Cliente;
 import entity.Consulta;
+import entity.Servico;
 import entity.Veterinario;
 import DAO.ConsultaDAO;
 
@@ -25,6 +26,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ConcluirAtendimentoController{
 

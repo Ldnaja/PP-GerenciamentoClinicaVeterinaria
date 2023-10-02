@@ -52,6 +52,8 @@ public class Veterinario {
         return servicos;
     }
 
+    public void setServicos(List<Servico> servicos) { this.servicos = servicos; }
+
     public void adicionarServico(Servico servico) {
         this.servicos.add(servico);
     }
