@@ -100,7 +100,7 @@ public class ClienteDAO {
         return null;
     }
 
-    public static List<Cliente> acharClientes(String nomeAnimal){
+    /*public static List<Cliente> acharClientes(String nomeAnimal){
         String sql = "SELECT * FROM CLIENTE INNER JOIN ANIMAL ON CLIENTE.idCliente = ANIMAL.idCliente WHERE ANIMAL.nome = ?";
 
         List<Cliente> clientes = new ArrayList<Cliente>();
@@ -122,18 +122,61 @@ public class ClienteDAO {
             e.printStackTrace();
         }
         return null;
+    }*/
+
+    public static List<Cliente> acharClientes(Cliente cliente){
+        String sql = "SELECT * FROM CLIENTE WHERE nome = ?";
+
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        try(PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)){
+            stmt.setString(1, cliente.getNome());
+
+            try(ResultSet rs = stmt.executeQuery()){
+
+                while(rs.next()){
+                    Cliente clienteAchado = new Cliente();
+                    clienteAchado.setId(rs.getInt("idCliente"));
+                    clienteAchado.setNome(rs.getString("nome"));
+                    clienteAchado.setCpf(rs.getString("cpf"));
+                    clientes.add(clienteAchado);
+                }
+            }
+            return clientes;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    /*public static void main(String[] args){
-        Cliente cliente = new Cliente();
-        cliente.setNome("João");
-        cliente.setCpf("11223344");
+    public List<Cliente> listarClientes() {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM CLIENTE";
 
-        ClienteDAO clienteDAO = new ClienteDAO();
-        //clienteDAO.adicionarCliente(cliente, "Thiago", "Gato");
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql);
+             ResultSet resultSet = stmt.executeQuery()) {
 
-        Cliente cpfTeste = clienteDAO.acharClientePeloCPF("11223344");
-        System.out.println(cpfTeste.getNome());
-        System.out.println(verificarCliente(cliente));
-    }*/
+            while (resultSet.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(resultSet.getInt("idCliente"));
+                cliente.setNome(resultSet.getString("nome"));
+                cliente.setCpf(resultSet.getString("cpf"));
+                clientes.add(cliente);
+            }
+            return clientes;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void excluirCliente(String nome){
+        String sqlExcluir = "DELETE FROM CLIENTE WHERE nome = ?";
+        try(PreparedStatement stmtExcluir = conexao.getConexao().prepareStatement(sqlExcluir)){
+            stmtExcluir.setString(1, nome);
+            stmtExcluir.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
 }

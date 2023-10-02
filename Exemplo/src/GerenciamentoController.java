@@ -41,13 +41,11 @@ public class GerenciamentoController {
 
     @FXML
     void informaçõesGerais(ActionEvent event) throws IOException {
-        /*
-        AINDA DECIDIR O QUE FAZER
-        Parent root = FXMLLoader.load(getClass().getResource("adicionarAnimal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("informacoesGerais.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
 
     }
 

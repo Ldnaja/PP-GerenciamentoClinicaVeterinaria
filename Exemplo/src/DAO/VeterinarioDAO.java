@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexao.conexao;
+import entity.Cliente;
 import entity.Veterinario;
 
 public class VeterinarioDAO {
@@ -144,11 +145,35 @@ public class VeterinarioDAO {
         return null;
     }
 
-    /*public static void main(String[] args){
-        Veterinario veterinario = new Veterinario(null);
-        veterinario.setNome("kristophr");
+    public static List<Veterinario> listaVeterinarios(){
+        List<Veterinario> veterinarios = new ArrayList<>();
+        String sql = "SELECT * FROM VETERINARIO";
 
-        VeterinarioDAO veterinarioDAO = new VeterinarioDAO();
-        veterinarioDAO.adicionarVeterinario(veterinario, "consulta normal", "Gato");
-    }*/
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql);
+             ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                Veterinario veterinario = new Veterinario();
+                veterinario.setId(resultSet.getInt("idVeterinario"));
+                veterinario.setNome(resultSet.getString("nome"));
+                veterinario.setCRMV(resultSet.getString("CRMV"));
+                veterinarios.add(veterinario);
+            }
+            return veterinarios;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void excluirVeterinario(String nome){
+        String sql = "DELETE FROM VETERINARIO WHERE nome = ?";
+
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
